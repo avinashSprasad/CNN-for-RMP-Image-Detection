@@ -1,0 +1,9 @@
+{"time":"2025-07-22T11:42:14.866072632-07:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-07-22T11:42:15.094064744-07:00","level":"INFO","msg":"stream: created new stream","id":"u49ehzwn"}
+{"time":"2025-07-22T11:42:15.094123147-07:00","level":"INFO","msg":"stream: started","id":"u49ehzwn"}
+{"time":"2025-07-22T11:42:15.094153579-07:00","level":"INFO","msg":"handler: started","stream_id":"u49ehzwn"}
+{"time":"2025-07-22T11:42:15.094197499-07:00","level":"INFO","msg":"sender: started","stream_id":"u49ehzwn"}
+{"time":"2025-07-22T11:42:15.094142348-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"u49ehzwn"}
+{"time":"2025-07-22T13:25:31.100353748-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": net/http: request canceled (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2025-07-22T13:36:18.727163849-07:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/files/avisprasad2009-ucsb/efficientnet-deepfake/u49ehzwn/file_stream"}
+{"time":"2025-07-22T13:36:18.736591917-07:00","level":"ERROR+4","msg":"filestream: fatal error: filestream: failed to upload: 404 Not Found path=files/avisprasad2009-ucsb/efficientnet-deepfake/u49ehzwn/file_stream: {\"error\":\"run efficientnet-deepfake/u49ehzwn not found while streaming file\"}"}

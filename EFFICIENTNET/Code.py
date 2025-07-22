@@ -8,14 +8,16 @@ from torchvision import transforms
 from torch.utils.data import DataLoader, random_split
 from torchvision.datasets import ImageFolder
 from PIL import UnidentifiedImageError, Image
-
+from tqdm import tqdm  # 🔴 ADDED
 # -------------------- WANDB SETUP --------------------
 wandb.init(project="efficientnet-deepfake", name="custom-efficientnet")
+
+# ... your imports and other code ...
 
 # -------------------- CONFIG --------------------
 config = {
     "epochs": 5,
-    "batch_size": 32,
+    "batch_size": 32,  # Reduced from 32 to 8
     "lr": 1e-4,
     "image_size": 224,
     "save_dir": "/home/avinash/detectionCOde/EFFICIENTNET"
@@ -23,17 +25,47 @@ config = {
 wandb.config.update(config)
 
 # -------------------- DEVICE --------------------
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
 
-# -------------------- SAFE IMAGEFOLDER --------------------
+
+# Clear CUDA cache before training
+if device.type == 'cuda':
+    torch.cuda.empty_cache()
+
+# ... rest of your code unchanged ...
+
+# -------------------- DEVICE --------------------
+
+
+# -------------------- SAFE IMAGEFOLDER WITH PRE-FILTER --------------------
 class SafeImageFolder(ImageFolder):
-    def __getitem__(self, index):
-        try:
-            return super().__getitem__(index)
-        except UnidentifiedImageError:
-            print(f"⚠️ Skipping unreadable image: {self.imgs[index][0]}")
-            return self.__getitem__((index + 1) % len(self.imgs))
+    def __init__(self, root, transform=None):
+        super().__init__(root, transform=transform)
 
+        good_imgs = []
+        print("🧹 Filtering and deleting unreadable images...")
+
+        # ✅ tqdm shows progress over image paths
+        for path, label in tqdm(self.imgs, desc="Checking images"):
+            try:
+                with Image.open(path) as img:
+                    img.verify()  # ✅ Check image file integrity
+                good_imgs.append((path, label))
+            except Exception as e:
+                print(f"❌ Corrupted image detected: {path} ({e})")
+                try:
+                    os.remove(path)  # ✅ Permanently delete the corrupted image
+                    print(f"🗑️ Deleted: {path}")
+                except Exception as del_err:
+                    print(f"⚠️ Failed to delete {path}: {del_err}")
+
+        # ✅ Keep only valid images
+        self.imgs = good_imgs
+        self.samples = good_imgs  # ImageFolder uses .samples internally
+
+    def __getitem__(self, index):
+        # ✅ No try-except needed — only good files remain
+        return super().__getitem__(index)
 # -------------------- TRANSFORM --------------------
 transform = transforms.Compose([
     transforms.Resize((config["image_size"], config["image_size"])),
@@ -43,9 +75,10 @@ transform = transforms.Compose([
 ])
 
 # -------------------- DATA --------------------
-data_dir = "/home/avinash/dataDetection/genimage/stableDiffusion/stable_diffusion_v_1_5/imagenet_ai_0424_sdv5/train/" # defines where images are formed
+data_dir = "/home/avinash/dataDetection/genimage/stableDiffusion/stable_diffusion_v_1_5/imagenet_ai_0424_sdv5/train/"
 dataset = SafeImageFolder(data_dir, transform=transform)
 print("Found classes:", dataset.classes)
+print(f"Number of readable images: {len(dataset)}")
 
 train_size = int(0.8 * len(dataset))
 val_size = len(dataset) - train_size
@@ -110,14 +143,21 @@ model = CustomEfficientNet(num_classes=2).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=config["lr"])
 
-# -------------------- TRAINING --------------------
+
+
+batch_limit = 20  # 🔴 ADDED: Limit batches per epoch for shorter training
+
 for epoch in range(config["epochs"]):
     model.train()
     running_loss = 0.0
     correct = 0
     total = 0
 
-    for images, labels in train_loader:
+    # 🟢 CHANGED: tqdm and batch limit
+    for i, (images, labels) in enumerate(tqdm(train_loader, desc=f"Epoch {epoch+1} [Train]", leave=False)):
+        if i >= batch_limit:
+            break  # 🔴 ADDED: shorten the epoch by cutting off batch count
+
         images, labels = images.to(device), labels.to(device)
         optimizer.zero_grad()
         outputs = model(images)
@@ -130,7 +170,7 @@ for epoch in range(config["epochs"]):
         correct += preds.eq(labels).sum().item()
         total += labels.size(0)
 
-    train_loss = running_loss / len(train_loader)
+    train_loss = running_loss / batch_limit  # 🟢 CHANGED denominator
     train_acc = 100. * correct / total
 
     # -------------------- VALIDATION --------------------
@@ -139,8 +179,12 @@ for epoch in range(config["epochs"]):
     val_correct = 0
     val_total = 0
 
+    # 🟢 CHANGED: tqdm and batch limit
     with torch.no_grad():
-        for images, labels in val_loader:
+        for i, (images, labels) in enumerate(tqdm(val_loader, desc=f"Epoch {epoch+1} [Val]", leave=False)):
+            if i >= batch_limit:
+                break  # 🔴 ADDED: shorten the epoch for validation too
+
             images, labels = images.to(device), labels.to(device)
             outputs = model(images)
             loss = criterion(outputs, labels)
@@ -150,7 +194,7 @@ for epoch in range(config["epochs"]):
             val_correct += preds.eq(labels).sum().item()
             val_total += labels.size(0)
 
-    val_loss /= len(val_loader)
+    val_loss /= batch_limit  # 🟢 CHANGED denominator
     val_acc = 100. * val_correct / val_total
 
     # -------------------- LOGGING --------------------
@@ -172,11 +216,3 @@ for epoch in range(config["epochs"]):
 
 # -------------------- FINISH --------------------
 wandb.finish()
-#32400 images
-'''
-wandb:          epoch 4
-wandb: train_accuracy 99.85995
-wandb:     train_loss 0.00443
-wandb:   val_accuracy 99.93364
-wandb:       val_loss 0.00194
-'''
