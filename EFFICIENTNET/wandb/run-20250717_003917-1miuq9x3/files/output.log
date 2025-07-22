@@ -1,0 +1,3 @@
+Downloading: "https://github.com/lukemelas/EfficientNet-PyTorch/releases/download/1.0/efficientnet-b4-6ed6700e.pth" to /home/avinash/.cache/torch/hub/checkpoints/efficientnet-b4-6ed6700e.pth
+100.0%
+Loaded pretrained weights for efficientnet-b4

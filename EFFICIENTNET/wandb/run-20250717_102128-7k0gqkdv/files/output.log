@@ -1,0 +1,21 @@
+Found classes: ['ai', 'nature']
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00094.png
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00098.png
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00081.png
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00107.png
+[Epoch 1] Train Acc: 97.79%, Val Acc: 99.32%
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00098.png
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00081.png
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00094.png
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00107.png
+[Epoch 2] Train Acc: 99.65%, Val Acc: 99.90%
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00094.png
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00098.png
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00081.png
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00107.png
+[Epoch 3] Train Acc: 99.79%, Val Acc: 99.93%
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00081.png
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00094.png
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00098.png
+⚠️ Skipping unreadable image: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00107.png
+[Epoch 4] Train Acc: 99.86%, Val Acc: 99.93%

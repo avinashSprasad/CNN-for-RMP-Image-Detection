@@ -1,0 +1,4 @@
+Using device: cpu
+Dataset directory used: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train
+Found classes: ['ai', 'nature']
+Total dataset size: 324000

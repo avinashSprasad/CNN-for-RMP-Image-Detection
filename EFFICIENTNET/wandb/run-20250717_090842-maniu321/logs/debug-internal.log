@@ -1,0 +1,12 @@
+{"time":"2025-07-17T09:08:43.211783719-07:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-07-17T09:08:43.457277414-07:00","level":"INFO","msg":"stream: created new stream","id":"maniu321"}
+{"time":"2025-07-17T09:08:43.457363955-07:00","level":"INFO","msg":"stream: started","id":"maniu321"}
+{"time":"2025-07-17T09:08:43.457372392-07:00","level":"INFO","msg":"handler: started","stream_id":"maniu321"}
+{"time":"2025-07-17T09:08:43.457430802-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"maniu321"}
+{"time":"2025-07-17T09:08:43.457417277-07:00","level":"INFO","msg":"sender: started","stream_id":"maniu321"}
+{"time":"2025-07-17T09:21:15.896426033-07:00","level":"INFO","msg":"stream: closing","id":"maniu321"}
+{"time":"2025-07-17T09:21:16.322278831-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-07-17T09:21:16.487209218-07:00","level":"INFO","msg":"handler: closed","stream_id":"maniu321"}
+{"time":"2025-07-17T09:21:16.487277421-07:00","level":"INFO","msg":"sender: closed","stream_id":"maniu321"}
+{"time":"2025-07-17T09:21:16.48726789-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"maniu321"}
+{"time":"2025-07-17T09:21:16.487431962-07:00","level":"INFO","msg":"stream: closed","id":"maniu321"}

@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET/Code.py", line 83, in <module>
+    outputs = model(images)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/efficientnet_pytorch/model.py", line 314, in forward
+    x = self.extract_features(inputs)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/efficientnet_pytorch/model.py", line 289, in extract_features
+    x = self._swish(self._bn0(self._conv_stem(inputs)))
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/efficientnet_pytorch/utils.py", line 275, in forward
+    x = F.conv2d(x, self.weight, self.bias, self.stride, self.padding, self.dilation, self.groups)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 212.00 MiB. GPU 0 has a total capacity of 11.90 GiB of which 34.81 MiB is free. Process 2841831 has 3.11 GiB memory in use. Process 1984734 has 1.40 GiB memory in use. Process 2486040 has 1.73 GiB memory in use. Process 1690273 has 930.00 MiB memory in use. Process 3698330 has 1.60 GiB memory in use. Process 368461 has 2.11 GiB memory in use. Process 413216 has 680.00 MiB memory in use. Including non-PyTorch memory, this process has 356.00 MiB memory in use. Of the allocated memory 174.82 MiB is allocated by PyTorch, and 19.18 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

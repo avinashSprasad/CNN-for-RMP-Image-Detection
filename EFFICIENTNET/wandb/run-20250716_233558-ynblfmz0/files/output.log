@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET/Code.py", line 30, in <module>
+    dataset = datasets.ImageFolder(data_dir, transform=transform)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torchvision/datasets/folder.py", line 328, in __init__
+    super().__init__(
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torchvision/datasets/folder.py", line 149, in __init__
+    classes, class_to_idx = self.find_classes(self.root)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torchvision/datasets/folder.py", line 234, in find_classes
+    return find_classes(directory)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torchvision/datasets/folder.py", line 41, in find_classes
+    classes = sorted(entry.name for entry in os.scandir(directory) if entry.is_dir())
+FileNotFoundError: [Errno 2] No such file or directory: '/path/to/genimage'

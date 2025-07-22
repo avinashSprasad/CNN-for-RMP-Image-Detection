@@ -1,0 +1,25 @@
+Dataset directory used: /home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train
+Found classes: ['ai', 'nature']
+Total dataset size: 324000
+Traceback (most recent call last):
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET/Code.py", line 108, in <module>
+    for images, labels in train_loader:
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 733, in __next__
+    data = self._next_data()
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 789, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 50, in fetch
+    data = self.dataset.__getitems__(possibly_batched_index)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torch/utils/data/dataset.py", line 416, in __getitems__
+    return [self.dataset[self.indices[idx]] for idx in indices]
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torch/utils/data/dataset.py", line 416, in <listcomp>
+    return [self.dataset[self.indices[idx]] for idx in indices]
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torchvision/datasets/folder.py", line 245, in __getitem__
+    sample = self.loader(path)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torchvision/datasets/folder.py", line 284, in default_loader
+    return pil_loader(path)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/torchvision/datasets/folder.py", line 263, in pil_loader
+    img = Image.open(f)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/lib/python3.10/site-packages/PIL/Image.py", line 3580, in open
+    raise UnidentifiedImageError(msg)
+PIL.UnidentifiedImageError: cannot identify image file <_io.BufferedReader name='/home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/ai/116_biggan_00107.png'>
