@@ -25,7 +25,7 @@ config = {
 wandb.config.update(config)
 
 # -------------------- DEVICE --------------------
-device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
 
 
 # Clear CUDA cache before training
@@ -38,6 +38,7 @@ if device.type == 'cuda':
 
 
 # -------------------- SAFE IMAGEFOLDER WITH PRE-FILTER --------------------
+'''
 class SafeImageFolder(ImageFolder):
     def __init__(self, root, transform=None):
         super().__init__(root, transform=transform)
@@ -66,6 +67,7 @@ class SafeImageFolder(ImageFolder):
     def __getitem__(self, index):
         # ✅ No try-except needed — only good files remain
         return super().__getitem__(index)
+'''
 # -------------------- TRANSFORM --------------------
 transform = transforms.Compose([
     transforms.Resize((config["image_size"], config["image_size"])),
@@ -74,11 +76,13 @@ transform = transforms.Compose([
                          std=[0.229, 0.224, 0.225])
 ])
 
+
 # -------------------- DATA --------------------
 data_dir = "/home/avinash/dataDetection/genimage/stableDiffusion/stable_diffusion_v_1_5/imagenet_ai_0424_sdv5/train/"
-dataset = SafeImageFolder(data_dir, transform=transform)
+dataset = ImageFolder(data_dir, transform=transform)
+
 print("Found classes:", dataset.classes)
-print(f"Number of readable images: {len(dataset)}")
+print(f"Number of images: {len(dataset)}")
 
 train_size = int(0.8 * len(dataset))
 val_size = len(dataset) - train_size

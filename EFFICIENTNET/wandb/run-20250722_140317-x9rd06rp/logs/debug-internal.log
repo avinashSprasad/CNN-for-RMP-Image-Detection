@@ -1,0 +1,17 @@
+{"time":"2025-07-22T14:03:17.75547966-07:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-07-22T14:03:18.005978332-07:00","level":"INFO","msg":"stream: created new stream","id":"x9rd06rp"}
+{"time":"2025-07-22T14:03:18.006072891-07:00","level":"INFO","msg":"handler: started","stream_id":"x9rd06rp"}
+{"time":"2025-07-22T14:03:18.006091991-07:00","level":"INFO","msg":"stream: started","id":"x9rd06rp"}
+{"time":"2025-07-22T14:03:18.006116442-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"x9rd06rp"}
+{"time":"2025-07-22T14:03:18.006147037-07:00","level":"INFO","msg":"sender: started","stream_id":"x9rd06rp"}
+{"time":"2025-07-22T14:08:18.46886034-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": net/http: request canceled (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2025-07-22T14:08:50.970166485-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": context deadline exceeded"}
+{"time":"2025-07-22T14:09:25.847061224-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": context deadline exceeded"}
+{"time":"2025-07-22T14:21:48.48080012-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": context deadline exceeded"}
+{"time":"2025-07-22T14:33:03.487812883-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": net/http: request canceled (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2025-07-22T14:56:57.707124609-07:00","level":"INFO","msg":"stream: closing","id":"x9rd06rp"}
+{"time":"2025-07-22T14:56:58.133319917-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-07-22T14:56:58.254659684-07:00","level":"INFO","msg":"handler: closed","stream_id":"x9rd06rp"}
+{"time":"2025-07-22T14:56:58.25472733-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"x9rd06rp"}
+{"time":"2025-07-22T14:56:58.254744811-07:00","level":"INFO","msg":"sender: closed","stream_id":"x9rd06rp"}
+{"time":"2025-07-22T14:56:58.254875045-07:00","level":"INFO","msg":"stream: closed","id":"x9rd06rp"}

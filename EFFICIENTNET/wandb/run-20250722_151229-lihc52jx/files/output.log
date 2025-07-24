@@ -1,0 +1,8 @@
+Found classes: ['ai', 'nature']
+Number of images: 315626
+                                                                                                   
+[Epoch 1] Train Acc: 58.59%, Val Acc: 43.91%
+[Epoch 2] Train Acc: 64.22%, Val Acc: 58.59%
+[Epoch 3] Train Acc: 66.09%, Val Acc: 69.84%
+[Epoch 4] Train Acc: 73.12%, Val Acc: 73.75%
+[Epoch 5] Train Acc: 72.50%, Val Acc: 71.56%

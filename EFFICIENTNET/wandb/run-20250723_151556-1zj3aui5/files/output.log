@@ -1,0 +1,17 @@
+Found classes: ['ai', 'nature']
+Number of images: 315626
+Traceback (most recent call last):                                                                 
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET/EfficientNet_COY.py", line 133, in <module>
+    images, labels = images.to(device), labels.to(device)
+RuntimeError: CUDA error: the launch timed out and was terminated
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Traceback (most recent call last):
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET/EfficientNet_COY.py", line 133, in <module>
+    images, labels = images.to(device), labels.to(device)
+RuntimeError: CUDA error: the launch timed out and was terminated
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.

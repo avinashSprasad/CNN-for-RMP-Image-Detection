@@ -1,0 +1,26 @@
+🧹 Filtering and deleting unreadable images...
+Checking images:   2%|▋                                     | 5594/315626 [00:26<24:40, 209.42it/s]
+Traceback (most recent call last):
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET/Code.py", line 79, in <module>
+    dataset = SafeImageFolder(data_dir, transform=transform)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET/Code.py", line 52, in __init__
+    img.verify()  # ✅ Check image file integrity
+  File "/home/avinash/.local/lib/python3.10/site-packages/PIL/PngImagePlugin.py", line 851, in verify
+    self.png.verify()
+  File "/home/avinash/.local/lib/python3.10/site-packages/PIL/PngImagePlugin.py", line 247, in verify
+    self.crc(cid, ImageFile._safe_read(self.fp, length))
+  File "/home/avinash/.local/lib/python3.10/site-packages/PIL/ImageFile.py", line 704, in _safe_read
+    data = fp.read(size)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET/Code.py", line 79, in <module>
+    dataset = SafeImageFolder(data_dir, transform=transform)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET/Code.py", line 52, in __init__
+    img.verify()  # ✅ Check image file integrity
+  File "/home/avinash/.local/lib/python3.10/site-packages/PIL/PngImagePlugin.py", line 851, in verify
+    self.png.verify()
+  File "/home/avinash/.local/lib/python3.10/site-packages/PIL/PngImagePlugin.py", line 247, in verify
+    self.crc(cid, ImageFile._safe_read(self.fp, length))
+  File "/home/avinash/.local/lib/python3.10/site-packages/PIL/ImageFile.py", line 704, in _safe_read
+    data = fp.read(size)
+KeyboardInterrupt

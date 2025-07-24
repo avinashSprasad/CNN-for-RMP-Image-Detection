@@ -1,0 +1,12 @@
+Found classes: ['ai', 'nature']
+Number of images: 315626
+Epoch Progress: 100%|█████████████████████████████████████████████████████████████████| 7/7 [03:48<00:00, 32.69s/it]
+                                                                                                                    
+                                                                                                                    
+[Epoch 1] Train Acc: 69.06%, Val Acc: 45.16%
+[Epoch 2] Train Acc: 69.22%, Val Acc: 78.91%
+[Epoch 3] Train Acc: 75.94%, Val Acc: 45.47%
+[Epoch 4] Train Acc: 76.25%, Val Acc: 72.50%
+[Epoch 5] Train Acc: 77.03%, Val Acc: 69.22%
+[Epoch 6] Train Acc: 78.12%, Val Acc: 76.25%
+[Epoch 7] Train Acc: 80.31%, Val Acc: 73.75%

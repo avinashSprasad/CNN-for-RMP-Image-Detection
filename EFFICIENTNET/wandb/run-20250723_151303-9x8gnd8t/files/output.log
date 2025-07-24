@@ -1,0 +1,13 @@
+Found classes: ['ai', 'nature']
+Number of images: 315626
+                                                                                                                    
+[Epoch 1] ✅ Train Acc: 54.06%, Val Acc: 53.59%
+💾 Model saved to /home/avinash/detectionCOde/EFFICIENTNET/efficientnet_epoch_1.pth
+[Epoch 2] ✅ Train Acc: 57.66%, Val Acc: 53.75%
+💾 Model saved to /home/avinash/detectionCOde/EFFICIENTNET/efficientnet_epoch_2.pth
+[Epoch 3] ✅ Train Acc: 50.16%, Val Acc: 53.59%
+💾 Model saved to /home/avinash/detectionCOde/EFFICIENTNET/efficientnet_epoch_3.pth
+[Epoch 4] ✅ Train Acc: 54.84%, Val Acc: 54.84%
+💾 Model saved to /home/avinash/detectionCOde/EFFICIENTNET/efficientnet_epoch_4.pth
+[Epoch 5] ✅ Train Acc: 53.59%, Val Acc: 54.22%
+💾 Model saved to /home/avinash/detectionCOde/EFFICIENTNET/efficientnet_COY.pth
