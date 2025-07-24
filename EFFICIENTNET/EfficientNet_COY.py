@@ -16,13 +16,17 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from Co_Occurrence import CoOccurenceProcessor
 
 # -------------------- WANDB SETUP --------------------
-wandb.init(project="efficientnet-with-CORGB", name="efficientnet_COY", mode="online", settings=wandb.Settings(console="off"))
-
+wandb.init(
+    project="efficientNet_CORGB",              # ✅ New wandb project name
+    name="efficientNet_COY",                   # ✅ Run name
+    mode="online",
+    settings=wandb.Settings(console="off")
+)
 
 # -------------------- CONFIG --------------------
 config = {
     
-    "epochs": 5,
+    "epochs": 20,
     "batch_size": 16,
     "lr": 1e-4,
     "image_size": 224,
@@ -50,25 +54,20 @@ dataset = ImageFolder(data_dir, transform=transform)
 print("Found classes:", dataset.classes)
 print(f"Number of images: {len(dataset)}")
 
-train_size = int(0.8 * len(dataset))
-val_size = len(dataset) - train_size
-train_ds, val_ds = random_split(dataset, [train_size, val_size])
+dataset_size = len(dataset)
 
-train_loader = DataLoader(
-    train_ds,
-    batch_size=config["batch_size"],
-    shuffle=True,
-    drop_last=True,
-    num_workers=1,
-)
+# Calculate split sizes
+train_size = int(0.7 * dataset_size)
+val_size = int(0.15 * dataset_size)
+test_size = dataset_size - train_size - val_size  # remainder
 
-val_loader = DataLoader(
-    val_ds,
-    batch_size=config["batch_size"],
-    shuffle=False,
-    num_workers=1,
-)
+# Perform split
+train_ds, val_ds, test_ds = random_split(dataset, [train_size, val_size, test_size])
 
+# DataLoaders
+train_loader = DataLoader(train_ds, batch_size=config["batch_size"], shuffle=True, drop_last=True)
+val_loader = DataLoader(val_ds, batch_size=config["batch_size"], shuffle=False)
+test_loader = DataLoader(test_ds, batch_size=config["batch_size"], shuffle=False)
 
 # -------------------- MODEL --------------------
 class MBConvBlock(nn.Module):
@@ -167,6 +166,10 @@ print("Finished loading model")
 # -------------------- TRAINING --------------------
 batch_limit = 63  # Optional: speed up debugging
 
+# ✅ Create save directory once, before training loop
+os.makedirs(config["save_dir"], exist_ok=True)
+
+# ✅ Training loop
 for epoch in range(config["epochs"]):
     model.train()
     running_loss = 0.0
@@ -194,7 +197,6 @@ for epoch in range(config["epochs"]):
     # -------------------- VALIDATION --------------------
     model.eval()
     val_loss, val_correct, val_total = 0.0, 0, 0
-
     print("VALIDATION")
 
     with torch.no_grad():
@@ -226,13 +228,49 @@ for epoch in range(config["epochs"]):
     print(f"[Epoch {epoch+1}] ✅ Train Acc: {train_acc:.2f}%, Val Acc: {val_acc:.2f}%")
 
     # -------------------- SAVE MODEL --------------------
-    os.makedirs(config["save_dir"], exist_ok=True)
-    save_name = "efficientnet_CORGB_10epochs_16.pth" if epoch == config["epochs"] - 1 else f"efficientnet_epoch_{epoch+1}.pth"
-    save_path = os.path.join(config["save_dir"], save_name)
+    # 💾 Save model for this epoch
+    epoch_save_name = f"efficientNet_CORGB_epoch_{epoch+1}.pth"
+    epoch_save_path = os.path.join(config["save_dir"], epoch_save_name)
+    torch.save(model.state_dict(), epoch_save_path)
+    print(f"💾 Epoch {epoch+1} model saved to {epoch_save_path}")
 
-    torch.save(model.state_dict(), save_path)
+    # 💾 Save final model with simplified name on last epoch
+    if epoch == config["epochs"] - 1:
+        final_save_name = "efficientNet_CORGB.pth"
+        final_save_path = os.path.join(config["save_dir"], final_save_name)
+        torch.save(model.state_dict(), final_save_path)
+        print(f"🏁 Final model saved to {final_save_path}")
+
+    # Optional: free memory
     gc.collect()
-    print(f"💾 Model saved to {save_path}")
+
+# -------------------- TESTING --------------------
+model.eval()
+test_loss = 0.0
+test_correct = 0
+test_total = 0
+print("TESTING")
+
+with torch.no_grad():
+    for images, labels in tqdm(test_loader, desc="Testing", leave=False):
+        images, labels = images.to(device), labels.to(device)
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+
+        test_loss += loss.item()
+        preds = outputs.argmax(dim=1)
+        test_correct += preds.eq(labels).sum().item()
+        test_total += labels.size(0)
+
+test_loss /= len(test_loader)
+test_acc = 100. * test_correct / test_total
+
+print(f"🧪 Test Loss: {test_loss:.4f}, Test Accuracy: {test_acc:.2f}%")
+
+wandb.log({
+    "test_loss": test_loss,
+    "test_accuracy": test_acc
+})
 
 # -------------------- FINISH --------------------
 wandb.finish()

@@ -1,0 +1,23 @@
+Found classes: ['ai', 'nature']
+Number of images: 315626
+Epoch Progress:   0%|                                                                                                                                                  | 0/7 [00:02<?, ?it/s]
+Traceback (most recent call last):                                                                                                                                                           
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET/ResNet_COY.py", line 151, in <module>
+    outputs = model(images)
+  File "/home/avinash/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/avinash/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET/ResNet_COY.py", line 118, in forward
+    x = F.adaptive_avg_pool2d(x, (32, 32))       # Helps with CUDA timeout if needed
+NameError: name 'F' is not defined
+Traceback (most recent call last):
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET/ResNet_COY.py", line 151, in <module>
+    outputs = model(images)
+  File "/home/avinash/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/avinash/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET/ResNet_COY.py", line 118, in forward
+    x = F.adaptive_avg_pool2d(x, (32, 32))       # Helps with CUDA timeout if needed
+NameError: name 'F' is not defined

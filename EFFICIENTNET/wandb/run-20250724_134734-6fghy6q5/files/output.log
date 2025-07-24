@@ -1,0 +1,5 @@
+Found classes: ['ai', 'nature']
+Number of images: 315626
+Epoch Progress:   0%|                                                                                                                                                  | 0/7 [00:00<?, ?it/s]
+                                                                                                                                                                                             
+Epoch 1 [Val]:   1%|▊                                                                                                                                      | 12/1973 [00:16<45:25,  1.39s/it]

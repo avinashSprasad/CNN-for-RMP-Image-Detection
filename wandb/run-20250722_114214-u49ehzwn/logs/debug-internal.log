@@ -7,3 +7,9 @@
 {"time":"2025-07-22T13:25:31.100353748-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": net/http: request canceled (Client.Timeout exceeded while awaiting headers)"}
 {"time":"2025-07-22T13:36:18.727163849-07:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/files/avisprasad2009-ucsb/efficientnet-deepfake/u49ehzwn/file_stream"}
 {"time":"2025-07-22T13:36:18.736591917-07:00","level":"ERROR+4","msg":"filestream: fatal error: filestream: failed to upload: 404 Not Found path=files/avisprasad2009-ucsb/efficientnet-deepfake/u49ehzwn/file_stream: {\"error\":\"run efficientnet-deepfake/u49ehzwn not found while streaming file\"}"}
+{"time":"2025-07-22T14:02:16.131302576-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2025-07-22T14:08:16.136995209-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": context deadline exceeded"}
+{"time":"2025-07-22T14:09:16.139166358-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": net/http: request canceled (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2025-07-22T14:21:46.149371431-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": context deadline exceeded"}
+{"time":"2025-07-22T14:33:01.159225811-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": context deadline exceeded"}
+{"time":"2025-07-22T14:33:36.631406603-07:00","level":"INFO","msg":"api: retrying HTTP error","status":500,"url":"https://api.wandb.ai/graphql","body":"{\"errors\":[{\"message\":\"context deadline exceeded\",\"path\":[\"project\",\"run\"]}],\"data\":{\"project\":{\"run\":null}}}"}
