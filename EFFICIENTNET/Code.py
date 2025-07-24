@@ -7,6 +7,7 @@ import torch.optim as optim
 from torchvision import transforms
 from torch.utils.data import DataLoader, random_split
 from torchvision.datasets import ImageFolder
+import subprocess
 from PIL import UnidentifiedImageError, Image
 from tqdm import tqdm  # 🔴 ADDED
 # -------------------- WANDB SETUP --------------------
@@ -17,7 +18,7 @@ wandb.init(project="efficientnet-deepfake", name="custom-efficientnet")
 # -------------------- CONFIG --------------------
 config = {
     "epochs": 5,
-    "batch_size": 32,  # Reduced from 32 to 8
+    "batch_size": 8,  # Reduced from 32 to 8
     "lr": 1e-4,
     "image_size": 224,
     "save_dir": "/home/avinash/detectionCOde/EFFICIENTNET"
@@ -25,7 +26,7 @@ config = {
 wandb.config.update(config)
 
 # -------------------- DEVICE --------------------
-device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
 # Clear CUDA cache before training
@@ -78,18 +79,25 @@ transform = transforms.Compose([
 
 
 # -------------------- DATA --------------------
+# -------------------- DATA --------------------
 data_dir = "/home/avinash/dataDetection/genimage/stableDiffusion/stable_diffusion_v_1_5/imagenet_ai_0424_sdv5/train/"
 dataset = ImageFolder(data_dir, transform=transform)
 
 print("Found classes:", dataset.classes)
 print(f"Number of images: {len(dataset)}")
 
-train_size = int(0.8 * len(dataset))
-val_size = len(dataset) - train_size
-train_ds, val_ds = random_split(dataset, [train_size, val_size])
+# 70/15/15 Split
+total_len = len(dataset)
+train_len = int(0.70 * total_len)
+val_len = int(0.15 * total_len)
+test_len = total_len - train_len - val_len  # Remaining 15%
 
-train_loader = DataLoader(train_ds, batch_size=config["batch_size"], shuffle=True, drop_last=True)
-val_loader = DataLoader(val_ds, batch_size=config["batch_size"], shuffle=False)
+train_ds, val_ds, test_ds = random_split(dataset, [train_len, val_len, test_len])
+
+train_loader = DataLoader(train_ds, batch_size=config["batch_size"], shuffle=True, drop_last=True, num_workers=4, pin_memory=True)
+val_loader = DataLoader(val_ds, batch_size=config["batch_size"], shuffle=False, num_workers=4, pin_memory=True)
+test_loader = DataLoader(test_ds, batch_size=config["batch_size"], shuffle=False, num_workers=4, pin_memory=True)
+der = DataLoader(val_ds, batch_size=config["batch_size"], shuffle=False)
 
 # -------------------- MODEL --------------------
 class MBConvBlock(nn.Module):
@@ -211,6 +219,17 @@ for epoch in range(config["epochs"]):
     })
 
     print(f"[Epoch {epoch + 1}] Train Acc: {train_acc:.2f}%, Val Acc: {val_acc:.2f}%")
+
+    # 🔍 Show GPU usage after each epoch
+    print("\n📊 GPU status:")
+    subprocess.run(["nvidia-smi"])
+
+    # -------------------- SAVE MODEL --------------------
+    os.makedirs(config["save_dir"], exist_ok=True)
+    save_path = os.path.join(config["save_dir"], f"efficientnet_epoch_{epoch + 1}.pth")
+    torch.save(model.state_dict(), save_path)
+    gc.collect()
+
 
     # -------------------- SAVE MODEL --------------------
     os.makedirs(config["save_dir"], exist_ok=True)

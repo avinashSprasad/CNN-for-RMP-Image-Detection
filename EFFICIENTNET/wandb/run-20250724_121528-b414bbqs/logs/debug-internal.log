@@ -1,0 +1,12 @@
+{"time":"2025-07-24T12:15:28.86768498-07:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-07-24T12:15:29.152538677-07:00","level":"INFO","msg":"stream: created new stream","id":"b414bbqs"}
+{"time":"2025-07-24T12:15:29.152661801-07:00","level":"INFO","msg":"stream: started","id":"b414bbqs"}
+{"time":"2025-07-24T12:15:29.152694159-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"b414bbqs"}
+{"time":"2025-07-24T12:15:29.152700102-07:00","level":"INFO","msg":"sender: started","stream_id":"b414bbqs"}
+{"time":"2025-07-24T12:15:29.152766114-07:00","level":"INFO","msg":"handler: started","stream_id":"b414bbqs"}
+{"time":"2025-07-24T12:15:54.608148781-07:00","level":"INFO","msg":"stream: closing","id":"b414bbqs"}
+{"time":"2025-07-24T12:15:54.939474661-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-07-24T12:15:55.064281959-07:00","level":"INFO","msg":"handler: closed","stream_id":"b414bbqs"}
+{"time":"2025-07-24T12:15:55.064394881-07:00","level":"INFO","msg":"sender: closed","stream_id":"b414bbqs"}
+{"time":"2025-07-24T12:15:55.064373059-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"b414bbqs"}
+{"time":"2025-07-24T12:15:55.064555565-07:00","level":"INFO","msg":"stream: closed","id":"b414bbqs"}

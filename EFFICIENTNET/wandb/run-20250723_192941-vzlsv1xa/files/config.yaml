@@ -1,0 +1,76 @@
+_wandb:
+    value:
+        cli_version: 0.21.0
+        e:
+            ylm1eshz4f4mx3j9geaqizr6zyejpwyl:
+                codePath: EFFICIENTNET/EfficientNet_COY.py
+                codePathLocal: EfficientNet_COY.py
+                cpu_count: 44
+                cpu_count_logical: 88
+                cudaVersion: "12.2"
+                disk:
+                    /:
+                        total: "250373009408"
+                        used: "25093591040"
+                email: avisprasad2009@gmail.com
+                executable: /usr/bin/python3
+                git:
+                    commit: a29209c4ad3844b9bbe18822c15459a890ad30e8
+                    remote: git@github.com:avinashSprasad/CNN-for-RMP-Image-Detection.git
+                gpu: NVIDIA GeForce GTX TITAN X
+                gpu_count: 4
+                gpu_nvidia:
+                    - architecture: Maxwell
+                      cudaCores: 3072
+                      memoryTotal: "12884901888"
+                      name: NVIDIA GeForce GTX TITAN X
+                      uuid: GPU-2fc3cbf5-1127-8d9c-6d2c-925bde863c0c
+                    - architecture: Pascal
+                      cudaCores: 3840
+                      memoryTotal: "12884901888"
+                      name: NVIDIA TITAN Xp
+                      uuid: GPU-da37c23b-c1af-5d33-a707-08c38a4af16d
+                    - architecture: Pascal
+                      cudaCores: 3840
+                      memoryTotal: "12884901888"
+                      name: NVIDIA TITAN Xp
+                      uuid: GPU-4c7b4e72-3177-1b94-f340-ab3285052020
+                    - architecture: Pascal
+                      cudaCores: 3584
+                      memoryTotal: "11811160064"
+                      name: NVIDIA GeForce GTX 1080 Ti
+                      uuid: GPU-3e3af7ae-b792-4ade-b60a-c92376163844
+                host: skywalker2
+                memory:
+                    total: "135019888640"
+                os: Linux-6.8.0-59-generic-x86_64-with-glibc2.35
+                program: /media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET/EfficientNet_COY.py
+                python: CPython 3.10.12
+                root: /media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET
+                startedAt: "2025-07-24T02:29:41.250627Z"
+                writerId: ylm1eshz4f4mx3j9geaqizr6zyejpwyl
+        m: []
+        python_version: 3.10.12
+        t:
+            "1":
+                - 1
+                - 41
+            "2":
+                - 1
+                - 41
+            "3":
+                - 13
+            "4": 3.10.12
+            "5": 0.21.0
+            "12": 0.21.0
+            "13": linux-x86_64
+batch_size:
+    value: 16
+epochs:
+    value: 20
+image_size:
+    value: 224
+lr:
+    value: 0.0001
+save_dir:
+    value: /home/avinash/detectionCOde/EFFICIENTNET

@@ -1,0 +1,61 @@
+{
+  "os":  "Linux-6.8.0-59-generic-x86_64-with-glibc2.35",
+  "python":  "CPython 3.10.12",
+  "startedAt":  "2025-07-24T20:02:56.405705Z",
+  "program":  "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET/EfficientNet_COY.py",
+  "codePath":  "EFFICIENTNET/EfficientNet_COY.py",
+  "codePathLocal":  "EfficientNet_COY.py",
+  "git":  {
+    "remote":  "git@github.com:avinashSprasad/CNN-for-RMP-Image-Detection.git",
+    "commit":  "a29209c4ad3844b9bbe18822c15459a890ad30e8"
+  },
+  "email":  "avisprasad2009@gmail.com",
+  "root":  "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/EFFICIENTNET",
+  "host":  "skywalker2",
+  "executable":  "/media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/.venv/bin/python3",
+  "cpu_count":  44,
+  "cpu_count_logical":  88,
+  "gpu":  "NVIDIA GeForce GTX TITAN X",
+  "gpu_count":  4,
+  "disk":  {
+    "/":  {
+      "total":  "250373009408",
+      "used":  "24978132992"
+    }
+  },
+  "memory":  {
+    "total":  "135019888640"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA GeForce GTX TITAN X",
+      "memoryTotal":  "12884901888",
+      "cudaCores":  3072,
+      "architecture":  "Maxwell",
+      "uuid":  "GPU-2fc3cbf5-1127-8d9c-6d2c-925bde863c0c"
+    },
+    {
+      "name":  "NVIDIA TITAN Xp",
+      "memoryTotal":  "12884901888",
+      "cudaCores":  3840,
+      "architecture":  "Pascal",
+      "uuid":  "GPU-da37c23b-c1af-5d33-a707-08c38a4af16d"
+    },
+    {
+      "name":  "NVIDIA TITAN Xp",
+      "memoryTotal":  "12884901888",
+      "cudaCores":  3840,
+      "architecture":  "Pascal",
+      "uuid":  "GPU-4c7b4e72-3177-1b94-f340-ab3285052020"
+    },
+    {
+      "name":  "NVIDIA GeForce GTX 1080 Ti",
+      "memoryTotal":  "11811160064",
+      "cudaCores":  3584,
+      "architecture":  "Pascal",
+      "uuid":  "GPU-3e3af7ae-b792-4ade-b60a-c92376163844"
+    }
+  ],
+  "cudaVersion":  "12.2",
+  "writerId":  "en1gf86fwbcsm5mems7ubc7qgdruqsg2"
+}

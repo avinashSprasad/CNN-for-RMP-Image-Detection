@@ -21,7 +21,8 @@ wandb.init(project="efficientnet-with-CORGB", name="efficientnet_COY", mode="onl
 
 # -------------------- CONFIG --------------------
 config = {
-    "epochs": 20,
+    
+    "epochs": 5,
     "batch_size": 16,
     "lr": 1e-4,
     "image_size": 224,
@@ -30,9 +31,8 @@ config = {
 wandb.config.update(config)
 
 # -------------------- DEVICE --------------------
-device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
-if device.type == 'cuda':
-    torch.cuda.empty_cache()
+device = torch.device("cuda:3" if torch.cuda.is_available() else "cpu")
+
 
 # -------------------- TRANSFORM --------------------
 transform = transforms.Compose([
@@ -59,18 +59,14 @@ train_loader = DataLoader(
     batch_size=config["batch_size"],
     shuffle=True,
     drop_last=True,
-    num_workers=4,
-    pin_memory=True,
-    persistent_workers=True
+    num_workers=1,
 )
 
 val_loader = DataLoader(
     val_ds,
     batch_size=config["batch_size"],
     shuffle=False,
-    num_workers=4,
-    pin_memory=True,
-    persistent_workers=True
+    num_workers=1,
 )
 
 
@@ -103,11 +99,24 @@ class MBConvBlock(nn.Module):
             out += x
         return out
 
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+
 class CustomEfficientNet(nn.Module):
     def __init__(self, num_classes=2, num_levels=256):
         super().__init__()
+        self.num_levels = num_levels
+
+        # Apply co-occurrence on raw image: [B, 3, H, W]
+        self.co_occurrence = CoOccurenceProcessor(num_levels=num_levels)
+
+        # Co-occurrence output shape: [B, 2*3, 256, 256]
+        cooc_channels = 2 * 3  # 2 directions, 3 channels (Y or RGB)
+
         self.stem = nn.Sequential(
-            nn.Conv2d(3, 32, 3, stride=2, padding=1, bias=False),
+            nn.Conv2d(cooc_channels, 32, 3, stride=2, padding=1, bias=False),
             nn.BatchNorm2d(32),
             nn.ReLU()
         )
@@ -115,47 +124,48 @@ class CustomEfficientNet(nn.Module):
         self.block2 = MBConvBlock(32, 64)
         self.block3 = MBConvBlock(64, 128)
 
-        self.pool = nn.AdaptiveAvgPool2d((14, 14))  # Downsample spatial size to manageable 14x14
-
-        self.co_occurrence = CoOccurenceProcessor(num_levels=num_levels)  # num_levels=256 by default
-
-        # Number of directions = 2, channels after pooling = 128, co-occurrence channels = channels * directions = 256
-        # Each co-occurrence matrix is num_levels x num_levels
-        cooc_channels = 2 * 128
+        self.pool = nn.AdaptiveAvgPool2d((1))  # Reduce for final FC
 
         self.flatten = nn.Flatten()
         self.fc = nn.Sequential(
-            nn.Linear(cooc_channels * num_levels * num_levels, 512),
+            nn.Linear(128, 512),
             nn.ReLU(),
             nn.Dropout(0.3),
             nn.Linear(512, num_classes)
         )
 
     def forward(self, x):
-        x = self.stem(x)
+        co_feat = self.co_occurrence(x)  # [B, 6, 256, 256]
+
+        # Downsample co-occurrence to reduce huge spatial size (optional but recommended)
+        co_feat = F.adaptive_avg_pool2d(co_feat, (32, 32))  # for example
+
+        x = self.stem(co_feat)           # e.g. [B, 32, 16, 16]
         x = self.block1(x)
-        x = self.block2(x)
+
+        x = self.pool(x)                 # [B, 32, 1, 1]
+
+        x = self.block2(x)              # Will keep spatial 1x1 because block conv stride=1 and padding=1 might not preserve shape? Check below.
+        x = self.pool(x)                 # Probably redundant pooling here if spatial is already 1x1, but safe.
+
         x = self.block3(x)
-        # x shape here is [B, 128, H, W], H and W likely 112
+        x = self.pool(x)
 
-        x = self.pool(x)  # Downsample to [B, 128, 14, 14]
-        # print(f"After pooling shape: {x.shape}")
-
-        co_feat = self.co_occurrence(x)  # [B, 2*128, 256, 256]
-        # print(f"Co-occurrence output shape: {co_feat.shape}")
-
-        x = self.flatten(co_feat)
-        # print(f"Flattened shape: {x.shape}")
+        x = self.flatten(x)              # [B, 128]
 
         return self.fc(x)
 
+
+print("Starting loading model.")
 
 model = CustomEfficientNet(num_classes=2).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=config["lr"])
 
+print("Finished loading model")
+
 # -------------------- TRAINING --------------------
-batch_limit = 20  # Optional: speed up debugging
+batch_limit = 63  # Optional: speed up debugging
 
 for epoch in range(config["epochs"]):
     model.train()
@@ -185,14 +195,14 @@ for epoch in range(config["epochs"]):
     model.eval()
     val_loss, val_correct, val_total = 0.0, 0, 0
 
+    print("VALIDATION")
+
     with torch.no_grad():
         for i, (images, labels) in enumerate(tqdm(val_loader, desc=f"Epoch {epoch+1} [Val]", leave=False)):
             if i >= batch_limit:
                 break
 
-            images = images.to(device, non_blocking=True)
-            labels = labels.to(device, non_blocking=True)
-
+            images, labels = images.to(device), labels.to(device)
             outputs = model(images)
             loss = criterion(outputs, labels)
 

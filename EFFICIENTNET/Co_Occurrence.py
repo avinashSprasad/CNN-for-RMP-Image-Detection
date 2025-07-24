@@ -9,7 +9,7 @@ class CoOccurenceProcessor(nn.Module):
         # x: [B, C, H, W], expected 0–1 or 0–255 float
         if x.max() <= 1:
             x = x * 255.0
-        x = x.round().clamp(0, 255).long()
+        x = x.round().clamp(0, 255)
 
         B, C, H, W = x.shape
         device = x.device
