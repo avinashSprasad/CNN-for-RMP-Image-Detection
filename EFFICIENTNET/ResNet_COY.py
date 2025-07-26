@@ -13,7 +13,7 @@ import torch.nn.functional as F
 
 # -------------------- WANDB SETUP --------------------
 wandb.init(
-    project="ResNET_CORGB",              # ✅ New wandb project name
+    project="ResNET_CORGB_BIGGAN",              # ✅ New wandb project name
     name="ResNET_COY",                   # ✅ Run name
     mode="online",
     settings=wandb.Settings(console="off")
@@ -34,6 +34,33 @@ device = torch.device("cuda:3" if torch.cuda.is_available() else "cpu")
 
 
 
+from torchvision.datasets import ImageFolder
+from PIL import Image, UnidentifiedImageError
+from torch.utils.data import random_split, DataLoader
+from torchvision import transforms
+
+# -------------------- SAFE LOADER --------------------
+def safe_loader(path):
+    try:
+        return Image.open(path).convert("RGB")
+    except UnidentifiedImageError:
+        print(f"⚠️ Skipping unreadable image: {path}")
+        return None
+
+class SafeImageFolder(ImageFolder):
+    def __getitem__(self, index):
+        path, target = self.samples[index]
+        sample = safe_loader(path)
+
+        while sample is None:
+            index = (index + 1) % len(self.samples)
+            path, target = self.samples[index]
+            sample = safe_loader(path)
+
+        if self.transform is not None:
+            sample = self.transform(sample)
+        return sample, target
+
 # -------------------- TRANSFORM --------------------
 transform = transforms.Compose([
     transforms.Resize((config["image_size"], config["image_size"])),
@@ -44,7 +71,7 @@ transform = transforms.Compose([
 
 # -------------------- DATA --------------------
 data_dir = "/home/avinash/dataDetection/GenImage/imagenet_ai_0419_biggan/train/"
-dataset = ImageFolder(data_dir, transform=transform)
+dataset = SafeImageFolder(data_dir, transform=transform)
 
 print("Found classes:", dataset.classes)
 print(f"Number of images: {len(dataset)}")
@@ -54,7 +81,7 @@ dataset_size = len(dataset)
 # Calculate split sizes
 train_size = int(0.7 * dataset_size)
 val_size = int(0.15 * dataset_size)
-test_size = dataset_size - train_size - val_size  # remainder
+test_size = dataset_size - train_size - val_size
 
 # Perform split
 train_ds, val_ds, test_ds = random_split(dataset, [train_size, val_size, test_size])
@@ -63,6 +90,8 @@ train_ds, val_ds, test_ds = random_split(dataset, [train_size, val_size, test_si
 train_loader = DataLoader(train_ds, batch_size=config["batch_size"], shuffle=True, drop_last=True)
 val_loader = DataLoader(val_ds, batch_size=config["batch_size"], shuffle=False)
 test_loader = DataLoader(test_ds, batch_size=config["batch_size"], shuffle=False)
+
+print("✅ Data loaded safely")
 
 # -------------------- CUSTOM RESNET --------------------
 class ResidualBlock(nn.Module):
@@ -146,8 +175,8 @@ optimizer = optim.Adam(model.parameters(), lr=config["lr"])
 
 from tqdm import tqdm
 
-batch_limit = 63  # 🔴 Limit batches per epoch
-
+ # 🔴 Limit batches per epoch
+batch_limit =400
 # 🔵 Outer tqdm for epochs
 for epoch in tqdm(range(config["epochs"]), desc="Epoch Progress", position=0):
     model.train()
@@ -158,7 +187,7 @@ for epoch in tqdm(range(config["epochs"]), desc="Epoch Progress", position=0):
     # 🟢 TRAINING LOOP WITH TQDM
     for i, (images, labels) in enumerate(tqdm(train_loader, desc=f"Epoch {epoch+1} [Train]", position=1, leave=False)):
         if i >= batch_limit:
-            break
+            break 
 
         images, labels = images.to(device), labels.to(device)
         optimizer.zero_grad()
@@ -213,14 +242,14 @@ for epoch in tqdm(range(config["epochs"]), desc="Epoch Progress", position=0):
     os.makedirs(config["save_dir"], exist_ok=True)
 
     # Save model for this epoch
-    epoch_save_name = f"ResNET_epoch_{epoch + 1}.pth"
+    epoch_save_name = f"ResNET_epoch_BigGAN_{epoch + 1}.pth"
     epoch_save_path = os.path.join(config["save_dir"], epoch_save_name)
     torch.save(model.state_dict(), epoch_save_path)
     print(f"💾 Epoch {epoch+1} model saved to {epoch_save_path}")
 
     # Save final model on last epoch
     if epoch == config["epochs"] - 1:
-        final_save_name = "ResNET.pth"
+        final_save_name = "ResNET_GAN_CORGB.pth"
         final_save_path = os.path.join(config["save_dir"], final_save_name)
         torch.save(model.state_dict(), final_save_path)
         print(f"🏁 Final model saved to {final_save_path}")

@@ -1,0 +1,6 @@
+{"time":"2025-07-24T15:22:31.317662977-07:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-07-24T15:22:31.577624538-07:00","level":"INFO","msg":"stream: created new stream","id":"k3nywiag"}
+{"time":"2025-07-24T15:22:31.577671888-07:00","level":"INFO","msg":"stream: started","id":"k3nywiag"}
+{"time":"2025-07-24T15:22:31.577698765-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"k3nywiag"}
+{"time":"2025-07-24T15:22:31.577749013-07:00","level":"INFO","msg":"sender: started","stream_id":"k3nywiag"}
+{"time":"2025-07-24T15:22:31.577792868-07:00","level":"INFO","msg":"handler: started","stream_id":"k3nywiag"}
