@@ -1,0 +1,12 @@
+{"time":"2025-07-26T14:00:09.082075791-07:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-07-26T14:00:09.331204043-07:00","level":"INFO","msg":"stream: created new stream","id":"icxmpycn"}
+{"time":"2025-07-26T14:00:09.331251422-07:00","level":"INFO","msg":"stream: started","id":"icxmpycn"}
+{"time":"2025-07-26T14:00:09.331289895-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"icxmpycn"}
+{"time":"2025-07-26T14:00:09.331328818-07:00","level":"INFO","msg":"sender: started","stream_id":"icxmpycn"}
+{"time":"2025-07-26T14:00:09.331359225-07:00","level":"INFO","msg":"handler: started","stream_id":"icxmpycn"}
+{"time":"2025-07-26T14:00:12.875874392-07:00","level":"INFO","msg":"stream: closing","id":"icxmpycn"}
+{"time":"2025-07-26T14:00:13.326350854-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-07-26T14:00:13.456441497-07:00","level":"INFO","msg":"handler: closed","stream_id":"icxmpycn"}
+{"time":"2025-07-26T14:00:13.456486186-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"icxmpycn"}
+{"time":"2025-07-26T14:00:13.456532809-07:00","level":"INFO","msg":"sender: closed","stream_id":"icxmpycn"}
+{"time":"2025-07-26T14:00:13.456574277-07:00","level":"INFO","msg":"stream: closed","id":"icxmpycn"}

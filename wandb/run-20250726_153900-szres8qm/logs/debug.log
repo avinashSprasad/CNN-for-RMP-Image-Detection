@@ -1,0 +1,27 @@
+2025-07-26 15:39:00,675 INFO    MainThread:3474100 [wandb_setup.py:_flush():80] Current SDK version is 0.21.0
+2025-07-26 15:39:00,675 INFO    MainThread:3474100 [wandb_setup.py:_flush():80] Configure stats pid to 3474100
+2025-07-26 15:39:00,675 INFO    MainThread:3474100 [wandb_setup.py:_flush():80] Loading settings from /home/avinash/.config/wandb/settings
+2025-07-26 15:39:00,675 INFO    MainThread:3474100 [wandb_setup.py:_flush():80] Loading settings from /media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/wandb/settings
+2025-07-26 15:39:00,675 INFO    MainThread:3474100 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-07-26 15:39:00,675 INFO    MainThread:3474100 [wandb_init.py:setup_run_log_directory():703] Logging user logs to /media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/wandb/run-20250726_153900-szres8qm/logs/debug.log
+2025-07-26 15:39:00,675 INFO    MainThread:3474100 [wandb_init.py:setup_run_log_directory():704] Logging internal logs to /media/hdd6/avinash/detectionCOde/CNN-for-RMP-Image-Detection/wandb/run-20250726_153900-szres8qm/logs/debug-internal.log
+2025-07-26 15:39:00,675 INFO    MainThread:3474100 [wandb_init.py:init():830] calling init triggers
+2025-07-26 15:39:00,675 INFO    MainThread:3474100 [wandb_init.py:init():835] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-07-26 15:39:00,675 INFO    MainThread:3474100 [wandb_init.py:init():871] starting backend
+2025-07-26 15:39:00,883 INFO    MainThread:3474100 [wandb_init.py:init():874] sending inform_init request
+2025-07-26 15:39:00,887 INFO    MainThread:3474100 [wandb_init.py:init():882] backend started and connected
+2025-07-26 15:39:00,888 INFO    MainThread:3474100 [wandb_init.py:init():953] updated telemetry
+2025-07-26 15:39:00,893 INFO    MainThread:3474100 [wandb_init.py:init():977] communicating run to backend with 90.0 second timeout
+2025-07-26 15:39:01,318 INFO    MainThread:3474100 [wandb_init.py:init():1029] starting run threads in backend
+2025-07-26 15:39:01,583 INFO    MainThread:3474100 [wandb_run.py:_console_start():2458] atexit reg
+2025-07-26 15:39:01,583 INFO    MainThread:3474100 [wandb_run.py:_redirect():2306] redirect: off
+2025-07-26 15:39:01,586 INFO    MainThread:3474100 [wandb_init.py:init():1075] run started, returning control to user process
+2025-07-26 15:39:01,586 INFO    MainThread:3474100 [wandb_run.py:_config_callback():1363] config_cb None None {'epochs': 10, 'batch_size': 16, 'lr': 1e-05, 'image_size': 224, 'save_dir': '/home/avinash/detectionCOde/EFFICIENTNET'}
+2025-07-27 03:43:13,293 INFO    MainThread:3474100 [wandb_run.py:_finish():2224] finishing run avisprasad2009-ucsb/EfficientNet/szres8qm
+2025-07-27 03:43:13,322 INFO    MainThread:3474100 [wandb_run.py:_atexit_cleanup():2423] got exitcode: 0
+2025-07-27 03:43:13,322 INFO    MainThread:3474100 [wandb_run.py:_restore():2405] restore
+2025-07-27 03:43:13,323 INFO    MainThread:3474100 [wandb_run.py:_restore():2411] restore done
+2025-07-27 03:43:14,082 INFO    MainThread:3474100 [wandb_run.py:_footer_history_summary_info():3903] rendering history
+2025-07-27 03:43:14,083 INFO    MainThread:3474100 [wandb_run.py:_footer_history_summary_info():3935] rendering summary
+2025-07-27 03:43:14,084 INFO    MainThread:3474100 [wandb_run.py:_footer_sync_info():3864] logging synced files
